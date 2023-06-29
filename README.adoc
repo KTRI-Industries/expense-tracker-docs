@@ -1,0 +1,37 @@
+= Expense Tracker Documentation
+:toc:
+
+This repo will be used to generate the expense tracker documentation site.
+
+For the moment, it will be generating it from local content but in the future we can combine docs from other repos.
+
+== Run locally
+
+To start writing docs locally you can execute the npm script:
+
+`npm run start`
+
+This script executes two other scripts:
+
+=== watch
+
+The watch script, runs the build script and re-runs it whenever changes in files occur.
+The build script builds the static site inside the build folder, so after every change the site is re-built.
+
+=== live-server
+
+This script runs a web server in port 4300, watches the build folder for changes and live reloads chrome when a change occurs.
+
+This way, after every change in a doc you can instantly see the change in the browser.
+
+== Structure
+
+The link:playbook.yml file is the main configuration file for Antora.
+
+It defines the content sources (for the moment only local docs folder), site's start page (index.adoc of ROOT module), which UI bundle to use, extra UI files (supplemental-ui folder) and Antora extensions (unlisted pages extension)
+
+Antora looks inside the docs folder for a modules folder and the default module is the ROOT module.
+
+In there, the link:docs/modules/ROOT/nav.adoc file is used to list all the pages for the left-sidebar navigation menu.
+
+In pages folder all actual documentation files reside.
