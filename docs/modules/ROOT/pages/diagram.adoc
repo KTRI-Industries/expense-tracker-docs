@@ -1,0 +1,34 @@
+= A test diagramsasda
+
+[structurizr]
+....
+workspace {
+
+    model {
+        user = person "User" "A user of Expense Manager."
+        softwareSystem = softwareSystem "Software System" "Expense Manager."
+
+        user -> softwareSystem "Uses"
+    }
+
+    views {
+        systemContext softwareSystem "SystemContext" {
+            include *
+            autoLayout
+        }
+
+        styles {
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Person" {
+                shape person
+                background #08427b
+                color #ffffff
+            }
+        }
+    }
+
+}
+....
