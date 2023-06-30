@@ -18,7 +18,7 @@
 
 == Non-functional
 
-- Cloud agnostic deployment (k8s?)
+- Cloud agnostic deployment (k8s overkill?)
 
 - Cheapest possible - some kind of IaaS?
 
