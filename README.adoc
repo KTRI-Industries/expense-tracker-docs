@@ -26,12 +26,12 @@ This way, after every change in a doc you can instantly see the change in the br
 
 == Structure
 
-The link:playbook.yml file is the main configuration file for Antora.
+The link:playbook.yml[] file is the main configuration file for Antora.
 
 It defines the content sources (for the moment only local docs folder), site's start page (index.adoc of ROOT module), which UI bundle to use, extra UI files (supplemental-ui folder) and Antora extensions (unlisted pages extension)
 
 Antora looks inside the docs folder for a modules folder and the default module is the ROOT module.
 
-In there, the link:docs/modules/ROOT/nav.adoc file is used to list all the pages for the left-sidebar navigation menu.
+In there, the link:docs/modules/ROOT/nav.adoc[] file is used to list all the pages for the left-sidebar navigation menu.
 
 In pages folder all actual documentation files reside.
