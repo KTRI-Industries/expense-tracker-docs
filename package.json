@@ -21,7 +21,7 @@
       "patterns": [
         "docs"
       ],
-      "extensions": "adoc,js,yml,hbs,svg,css,html",
+      "extensions": "adoc,js,yml,hbs",
       "quiet": false,
       "verbose": true
     }

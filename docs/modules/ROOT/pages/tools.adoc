@@ -2,72 +2,78 @@
 
 == Version Control
 
-- Github
+* [x] *Github*
 
-- Gitlab
+* [ ] Gitlab
 
--  ?
+* [ ]  ?
 
 == Issue Tracker / Project Management
 
-- Github
+* [x] *Github*
 
-- Gitlab
+* [ ] Gitlab
 
-- Trello
+* [ ] Trello
 
 == Documentation
 
-- Antora
+* [x] *Antora*
 
-- Plain wikis on GitHub/gitlab
+* [ ] Plain wikis on GitHub/gitlab
 
-- Docusaurus
+* [ ] Docusaurus
 
--  ?
+* [ ]  ?
 
 == Chat
 
-- Slack
+* [x] *Slack*
 
-- Discord
+* [ ] Discord
 
--  ?
+* [ ]  ?
 
 == IDE
 
-- IntelliJ
+* [ ] IntelliJ
 
-== Backend stack
+== Main tech stack
 
-- Kotlin / Spring Boot
+=== Backend
 
-== Frontend stack
+* [ ] Kotlin / Spring Boot
 
-- Typescript / Angular
+=== Frontend
 
-== Style guide backend
+* [ ] Typescript / Angular
 
-- Kotlin/Intellij default
+== Style guides
 
-- custom
+=== Backend
 
--  ?
+* [ ] Kotlin/Intellij default
 
-== Style guide frontend
+* [ ] custom
 
-- Prettier
+* [ ]  ?
 
--  ?
+=== Frontend
 
-== Linter backend
+* [ ] Prettier
 
-- Ktlint
+* [ ]  ?
 
--  ?
+== Linters
 
-== Linter frontend
+=== Backend
 
-- Prettier
+* [ ] Ktlint
 
--  ?
+* [ ]  ?
+
+=== Frontend
+
+* [ ] Prettier
+
+* [ ]  ?
