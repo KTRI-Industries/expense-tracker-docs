@@ -1,6 +1,9 @@
 * xref:mvp.adoc[]
 * xref:tools.adoc[]
 * xref:commit-message-format.adoc[]
+* Architecture Decision Records
+** xref:adrs/0001-gradle-multi-project.adoc[]
+* xref:diagram.adoc[]
 // * xref:special-characters.adoc[]
 // * xref:admonition.adoc[]
 // * xref:sidebar.adoc[]
