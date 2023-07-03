@@ -2,11 +2,11 @@
 
 Date: 2023-07-01
 
-=== Status
+== Status
 
 Proposed
 
-=== Context
+== Context
 
 Some important initial decisions must be made on the start of the project which will impact the project probably for all its life-time.
 One of the decisions is the general structure of the project and the build tool to use.
@@ -15,7 +15,7 @@ Microservice architecture is very popular these days, and it might benefit any p
 
 Concerning build tools, Maven is the most popular build tool for Java projects but Gradle has many advantages and is at the moment mature enough to be a valid alternative (in fact most new projects seem to be using Gradle).
 
-=== Decision
+== Decision
 
 We will create a Gradle multi-project build which means that all modules/projects will be part of a parent module/project (and not completely independent as it would be if we used a composite build).
 
@@ -23,7 +23,7 @@ We should consider module separation per bounded context (per DDD, as much as po
 
 We will also create one separate module for dependency/version management.
 
-=== Consequences
+== Consequences
 
 Using Gradle as build tool has several consequences.
 One of them is that the build script is code instead of xml (with all the advantages that this implies).
