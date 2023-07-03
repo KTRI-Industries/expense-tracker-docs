@@ -1,0 +1,38 @@
+= ADR 0002: Use Postgres and jOOQ
+
+Date: 2023-07-03
+
+== Status
+
+Proposed
+
+== Context
+
+When it comes to relational databases, the de facto choices are MySQL and PostgreSQL.
+
+PostgreSQl is very similar to MySQL, but it is supposed to be a more advanced version, with more features.
+Also, because it uses Multi-version concurrency control (MVCC) it is supposed to outperform MySQL in write-intensive applications.
+
+When accessing database from JVM applications, Hibernate is the ORM of choice.
+But it is not easy to create complex dynamic queries with Hibernate.
+Also, you need to be very careful when querying entities with nested relationships because the generated query is not always obvious.
+
+jOOQ can be a replacement for Hibernate, but also it can be used together with Hibernate.
+In that case, all non-trivial queries can be written in jOOQ but still use Hibernate for entity lifecycle operations (e.g. retrieve an entity, update and store it).
+
+== Decision
+
+We will use a dockerized PostgreSQL instance for local development.
+
+We will start with Hibernate and introduce jOOQ when initial database schema is created (jOOQ needs existing database for auto-generated classes).
+
+== Consequences
+
+Using PostgreSQL does not mean we need to use all the advanced features that are provided and that MySQL does not offer.
+It means that when we need such a feature it will be there for us to use it.
+
+Using jOOQ will result in a slight learning curve, but we can use it only when complex queries are needed, or maybe when native PostgreSQL features can be used, or advanced SQL syntax which are things not available in Hibernate.
+
+Finally, there is a killer feature, in case of complex queries, which is the https://vladmihalcea.com/fetch-multiple-to-many-jooq-multiset/[multiset].
+
+
