@@ -1,0 +1,16 @@
+name: Verify commit messages format
+on:
+    workflow_call:
+    push:
+        branches: '**'
+jobs:
+  check-commit-message:
+    name: Check Commit Message
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Commit Type
+        uses: gsactions/commit-message-checker@v2
+        with:
+          pattern: '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test) (#[0-9]+) (\([a-z ]+\))?: [\w ]+$'
+          flags: 'gm'
+          error: 'The commit message does not conform to "Conventional Commit" guidelines.'
