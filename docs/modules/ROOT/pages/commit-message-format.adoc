@@ -1,0 +1,18 @@
+= Commit message format
+
+The commit message should conform with the following regex:
+
+[source]
+```
+^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test) (#[0-9]+)([ ]\([a-z ]+\))?: [\w ]+$
+```
+
+So this is the generic format (context is optional):
+
+`<scope> #<issue_number> (<context>): <message>`
+
+Example of valid messages:
+
+`ci #3 (infra): Create action for verifying commit messages`
+
+`docs #5: Add indicative template for ADRs and first ADR`
