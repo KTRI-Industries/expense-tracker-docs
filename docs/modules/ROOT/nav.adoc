@@ -1,6 +1,6 @@
 * xref:mvp.adoc[]
 * xref:tools.adoc[]
-* xref:diagram.adoc[]
+* xref:commit-message-format.adoc[]
 // * xref:special-characters.adoc[]
 // * xref:admonition.adoc[]
 // * xref:sidebar.adoc[]
