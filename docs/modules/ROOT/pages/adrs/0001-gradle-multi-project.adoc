@@ -17,7 +17,7 @@ Concerning build tools, Maven is the most popular build tool for Java projects b
 
 == Decision
 
-We will create a Gradle multi-project build which means that all modules/projects will be part of a parent module/project (and not completely independent as it would be if we used a composite build).
+We will create a Gradle multi-project build, which means that all modules/projects will be part of a parent module/project (and not completely independent as it would be if we used a composite build).
 
 We should consider module separation per bounded context (per DDD, as much as possible).
 
@@ -28,11 +28,9 @@ We will also create one separate module for dependency/version management.
 Using Gradle as build tool has several consequences.
 One of them is that the build script is code instead of xml (with all the advantages that this implies).
 
-Using build cache, Gradle daemon and incremental build is (supposed to) increase build time considerably comparing with Maven.
+Using build cache, Gradle daemon and incremental build is (supposed to) increase build time considerably compared to Maven.
 
-Gradle, mainly because it is code-based, it is very flexible and customizable.
+Gradle, mainly because it is code-based, is very flexible and customizable.
 This does not mean that it has a lot of convention-over-configuration options, just that when you need custom flow it is easier to do than in Maven.
 
 One negative consequence of using Gradle is that at the beginning it might take some getting use to, since it is not using the familiar xml syntax.
-
-
