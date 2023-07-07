@@ -78,6 +78,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="0001-gradle-multi-project.html">ADR 0001: Create single multi-project Gradle build</a>
   </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="0002-database-and-libraries.html">ADR 0002: Use Postgres and jOOQ</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -89,9 +92,6 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Unlisted Pages</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="0002-database-and-libraries.html">ADR 0002: Use Postgres and jOOQ</a>
-  </li>
   <li class="nav-item" data-depth="1">
   </li>
 </ul>
@@ -125,7 +125,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Docs</a></li>
-    <li>Unlisted Pages</li>
+    <li>Architecture Decision Records</li>
     <li><a href="0002-database-and-libraries.html">ADR 0002: Use Postgres and jOOQ</a></li>
   </ul>
 </nav>
@@ -148,7 +148,7 @@
 <h2 id="_status"><a class="anchor" href="#_status"></a>Status</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Proposed</p>
+<p>Accepted</p>
 </div>
 </div>
 </div>
@@ -189,7 +189,8 @@ In that case, all non-trivial queries can be written in jOOQ but still use Hiber
 <div class="sectionbody">
 <div class="paragraph">
 <p>Using PostgreSQL does not mean we need to use all the advanced features that are provided and that MySQL does not offer.
-It means that when we need such a feature it will be there for us to use it.</p>
+It means that when we need such a feature it will be there for us to use it.
+One feature that we might end up using is row level security, to be used for multi-tenancy (see for example <a href="https://betterprogramming.pub/multi-tenancy-support-with-spring-boot-liquibase-and-postgresql-d41942dc0639">here</a>)</p>
 </div>
 <div class="paragraph">
 <p>Using jOOQ will result in a slight learning curve, but we can use it only when complex queries are needed, or maybe when native PostgreSQL features can be used, or advanced SQL syntax which are things not available in Hibernate.</p>
