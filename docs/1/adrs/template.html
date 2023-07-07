@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Commit message format :: Expense Tracker Docs</title>
+    <title>Untitled :: Expense Tracker Docs</title>
     <meta name="generator" content="Antora 3.1.4">
-    <link rel="stylesheet" href="../../_/css/site.css">
-    <script>var uiRootPath = '../../_'</script>
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
   </head>
   <body class="article">
 <header class="header">
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item" href="../..">Expense Tracker Docs</a>
+            <a class="navbar-item" href="../../..">Expense Tracker Docs</a>
                 <div class="navbar-item search hide-for-print">
                     <div id="search-field" class="field">
                         <input id="search-input" type="text" placeholder="Search the docs">
@@ -58,30 +58,30 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Docs</a></h3>
+    <h3 class="title"><a href="../index.html">Docs</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="mvp.html">MVP for expense-tracker</a>
+    <a class="nav-link" href="../mvp.html">MVP for expense-tracker</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="tools.html">Tools for expense-tracker</a>
+    <a class="nav-link" href="../tools.html">Tools for expense-tracker</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="commit-message-format.html">Commit message format</a>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../commit-message-format.html">Commit message format</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Architecture Decision Records</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="adrs/0001-gradle-multi-project.html">ADR 0001: Create single multi-project Gradle build</a>
+    <a class="nav-link" href="0001-gradle-multi-project.html">ADR 0001: Create single multi-project Gradle build</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="diagram.html">A test diagram</a>
+    <a class="nav-link" href="../diagram.html">A test diagram</a>
   </li>
 </ul>
   </li>
@@ -90,9 +90,9 @@
     <span class="nav-text">Unlisted Pages</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="adrs/0002-database-and-libraries.html">ADR 0002: Use Postgres and jOOQ</a>
+    <a class="nav-link" href="0002-database-and-libraries.html">ADR 0002: Use Postgres and jOOQ</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
   </li>
 </ul>
   </li>
@@ -106,10 +106,10 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="index.html">Docs</a>
+      <a class="title" href="../index.html">Docs</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">1</a>
+          <a href="../index.html">1</a>
         </li>
       </ul>
     </li>
@@ -121,43 +121,61 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Docs</a></li>
-    <li><a href="commit-message-format.html">Commit message format</a></li>
+    <li><a href="../index.html">Docs</a></li>
+    <li>Unlisted Pages</li>
+    <li><a href="template.html"></a></li>
   </ul>
 </nav>
-<div class="edit-this-page"><a href="https://github.com/KTRI-Industries/expense-tracker-docs/edit/main/docs/modules/ROOT/pages/commit-message-format.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/KTRI-Industries/expense-tracker-docs/edit/main/docs/modules/ROOT/pages/adrs/template.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Commit message format</h1>
+<div class="sect1">
+<h2 id="_adr_fileindex_title"><a class="anchor" href="#_adr_fileindex_title"></a>ADR {{fileIndex}}: {{title}}</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The commit message should conform with the following regex:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test) (#[0-9]+)([ ]\([a-z ]+\))?: [\w ]+$</code></pre>
-</div>
+<p>These documents have names that are short noun phrases. For example, "ADR 1: Deployment on Ruby on Rails 3.0.10" or "ADR 9: LDAP for Multitenant Integration". See <a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions">Michael Nygard&#8217;s blog post</a> for more details.</p>
 </div>
 <div class="paragraph">
-<p>So this is the generic format (context is optional):</p>
+<p>ISO8601 preferred</p>
 </div>
 <div class="paragraph">
-<p><code>&lt;scope&gt; #&lt;issue_number&gt; (&lt;context&gt;): &lt;message&gt;</code></p>
+<p>Date: {{date}}</p>
+</div>
+<div class="sect2">
+<h3 id="_status"><a class="anchor" href="#_status"></a>Status</h3>
+<div class="paragraph">
+<p>A decision may be "proposed" if the project stakeholders haven&#8217;t agreed with it yet, or "accepted" once it is agreed. If a later ADR changes or reverses a decision, it may be marked as "deprecated" or "superseded" with a reference to its replacement.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_context"><a class="anchor" href="#_context"></a>Context</h3>
+<div class="paragraph">
+<p>This section describes the forces at play, including technological, political, social, and project local. These forces are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply describing facts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_decision"><a class="anchor" href="#_decision"></a>Decision</h3>
+<div class="paragraph">
+<p>This section describes our response to these forces. It is stated in full sentences, with active voice. "We will …"</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_consequences"><a class="anchor" href="#_consequences"></a>Consequences</h3>
+<div class="paragraph">
+<p>This section describes the resulting context, after applying the decision. All consequences should be listed here, not just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them affect the team and project in the future.</p>
 </div>
 <div class="paragraph">
-<p>Example of valid messages:</p>
+<p>The whole document should be one or two pages long. We will write each ADR as if it is a conversation with a future developer. This requires good writing style, with full sentences organized into paragraphs. Bullets are acceptable only for visual style, not as an excuse for writing sentence fragments. (Bullets kill people, even PowerPoint bullets.)</p>
 </div>
-<div class="paragraph">
-<p><code>ci #3 (infra): Create action for verifying commit messages</code></p>
 </div>
-<div class="paragraph">
-<p><code>docs #5: Add indicative template for ADRs and first ADR</code></p>
+</div>
 </div>
 </article>
   </div>
@@ -167,10 +185,10 @@
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
-<script async src="../../_/js/vendor/highlight.js"></script>
-<script src="../../_/js/vendor/lunr.js"></script>
-<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
-<script async src="../../search-index.js"></script>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
   </body>
 </html>
