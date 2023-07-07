@@ -4,7 +4,7 @@ Date: 2023-07-03
 
 == Status
 
-Proposed
+Accepted
 
 == Context
 
@@ -30,6 +30,7 @@ We will start with Hibernate and introduce jOOQ when initial database schema is 
 
 Using PostgreSQL does not mean we need to use all the advanced features that are provided and that MySQL does not offer.
 It means that when we need such a feature it will be there for us to use it.
+One feature that we might end up using is row level security, to be used for multi-tenancy (see for example https://betterprogramming.pub/multi-tenancy-support-with-spring-boot-liquibase-and-postgresql-d41942dc0639[here])
 
 Using jOOQ will result in a slight learning curve, but we can use it only when complex queries are needed, or maybe when native PostgreSQL features can be used, or advanced SQL syntax which are things not available in Hibernate.
 

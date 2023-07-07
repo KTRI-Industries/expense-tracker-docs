@@ -4,7 +4,7 @@ Date: 2023-07-01
 
 == Status
 
-Proposed
+Accepted
 
 == Context
 
@@ -33,4 +33,4 @@ Using build cache, Gradle daemon and incremental build is (supposed to) increase
 Gradle, mainly because it is code-based, is very flexible and customizable.
 This does not mean that it has a lot of convention-over-configuration options, just that when you need custom flow it is easier to do than in Maven.
 
-One negative consequence of using Gradle is that at the beginning it might take some getting use to, since it is not using the familiar xml syntax.
+One negative consequence of using Gradle is that at the beginning it might take some getting used to, since it is not using the familiar xml syntax.
