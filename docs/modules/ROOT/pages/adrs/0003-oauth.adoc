@@ -1,0 +1,37 @@
+= ADR 0003: Use Keycloak for Identity and Access Management (IAM)
+
+Date: 2023-07-08
+
+== Status
+
+Accepted
+
+== Context
+
+Every non-trivial app needs a way to manage its users and their access.
+
+In the JVM ecosystem, the most popular open source product for IAM is Keycloak.
+
+The only realistic alternative at the moment would be a SaaS product like Okta.
+
+The big difference is that Keycloak will be self-hosted and managed whereas Okta is provided as a cloud service and only minimal configuration is required from our side.
+
+== Decision
+
+We will use Keycloak because of its maturity and popularity.
+It provides a lot of out-of-the-box options and gives us room for a lot of customization, if needed.
+
+We will use Keycloak both for user management and for authorization policies.
+TBD what kind of authorization mechanism we will use (RBAC, ABAC, etc)
+
+We will evaluate if it is feasible to use WebAuthn for better UX in mobile devices.
+
+== Consequences
+
+Using Keycloak will give us full control of how we want to handle IAM.
+It might be better suited for an application using a multi-tenant database (e.g. for applying custom property tokenID in JWT token).
+
+But also, it will result in a considerable effort for configuration and maintenance.
+For example, we will probably need to have the realm and clients configuration scripted and version controlled, so that we can apply them in any environment needed (local or not).
+
+

@@ -4,6 +4,7 @@
 * Architecture Decision Records
 ** xref:adrs/0001-gradle-multi-project.adoc[]
 ** xref:adrs/0002-database-and-libraries.adoc[]
+** xref:adrs/0003-oauth.adoc[]
 * xref:diagram.adoc[]
 // * xref:special-characters.adoc[]
 // * xref:admonition.adoc[]
