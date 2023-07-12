@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ADR 0001: Create single multi-project Gradle build :: Expense Tracker Docs</title>
+    <title>ADR 0003: Use Keycloak for Identity and Access Management (IAM) :: Expense Tracker Docs</title>
     <meta name="generator" content="Antora 3.1.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -75,13 +75,13 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Architecture Decision Records</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="0001-gradle-multi-project.html">ADR 0001: Create single multi-project Gradle build</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="0002-database-and-libraries.html">ADR 0002: Use Postgres and jOOQ</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="0003-oauth.html">ADR 0003: Use Keycloak for Identity and Access Management (IAM)</a>
   </li>
 </ul>
@@ -129,21 +129,21 @@
   <ul>
     <li><a href="../index.html">Docs</a></li>
     <li>Architecture Decision Records</li>
-    <li><a href="0001-gradle-multi-project.html">ADR 0001: Create single multi-project Gradle build</a></li>
+    <li><a href="0003-oauth.html">ADR 0003: Use Keycloak for Identity and Access Management (IAM)</a></li>
   </ul>
 </nav>
-<div class="edit-this-page"><a href="https://github.com/KTRI-Industries/expense-tracker-docs/edit/main/docs/modules/ROOT/pages/adrs/0001-gradle-multi-project.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/KTRI-Industries/expense-tracker-docs/edit/main/docs/modules/ROOT/pages/adrs/0003-oauth.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">ADR 0001: Create single multi-project Gradle build</h1>
+<h1 class="page">ADR 0003: Use Keycloak for Identity and Access Management (IAM)</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Date: 2023-07-01</p>
+<p>Date: 2023-07-08</p>
 </div>
 </div>
 </div>
@@ -159,14 +159,16 @@
 <h2 id="_context"><a class="anchor" href="#_context"></a>Context</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some important initial decisions must be made on the start of the project which will impact the project probably for all its life-time.
-One of the decisions is the general structure of the project and the build tool to use.</p>
+<p>Every non-trivial app needs a way to manage its users and their access.</p>
 </div>
 <div class="paragraph">
-<p>Microservice architecture is very popular these days, and it might benefit any project at some point, but it will probably slow down the progress initially. On the other hand, starting with what is called a Modulith would keep things organised and separated until there is actually a need to extract a microservice.</p>
+<p>In the JVM ecosystem, the most popular open source product for IAM is Keycloak.</p>
 </div>
 <div class="paragraph">
-<p>Concerning build tools, Maven is the most popular build tool for Java projects but Gradle has many advantages and is at the moment mature enough to be a valid alternative (in fact most new projects seem to be using Gradle).</p>
+<p>The only realistic alternative at the moment would be a SaaS product like Okta.</p>
+</div>
+<div class="paragraph">
+<p>The big difference is that Keycloak will be self-hosted and managed whereas Okta is provided as a cloud service and only minimal configuration is required from our side.</p>
 </div>
 </div>
 </div>
@@ -174,13 +176,15 @@ One of the decisions is the general structure of the project and the build tool 
 <h2 id="_decision"><a class="anchor" href="#_decision"></a>Decision</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We will create a Gradle multi-project build, which means that all modules/projects will be part of a parent module/project (and not completely independent as it would be if we used a composite build).</p>
+<p>We will use Keycloak because of its maturity and popularity.
+It provides a lot of out-of-the-box options and gives us room for a lot of customization, if needed.</p>
 </div>
 <div class="paragraph">
-<p>We should consider module separation per bounded context (per DDD, as much as possible).</p>
+<p>We will use Keycloak both for user management and for authorization policies.
+TBD what kind of authorization mechanism we will use (RBAC, ABAC, etc)</p>
 </div>
 <div class="paragraph">
-<p>We will also create one separate module for dependency/version management.</p>
+<p>We will evaluate if it is feasible to use WebAuthn for better UX in mobile devices.</p>
 </div>
 </div>
 </div>
@@ -188,18 +192,12 @@ One of the decisions is the general structure of the project and the build tool 
 <h2 id="_consequences"><a class="anchor" href="#_consequences"></a>Consequences</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Using Gradle as build tool has several consequences.
-One of them is that the build script is code instead of xml (with all the advantages that this implies).</p>
+<p>Using Keycloak will give us full control of how we want to handle IAM.
+It might be better suited for an application using a multi-tenant database (e.g. for applying custom property tokenID in JWT token).</p>
 </div>
 <div class="paragraph">
-<p>Using build cache, Gradle daemon and incremental build is (supposed to) increase build time considerably compared to Maven.</p>
-</div>
-<div class="paragraph">
-<p>Gradle, mainly because it is code-based, is very flexible and customizable.
-This does not mean that it has a lot of convention-over-configuration options, just that when you need custom flow it is easier to do than in Maven.</p>
-</div>
-<div class="paragraph">
-<p>One negative consequence of using Gradle is that at the beginning it might take some getting used to, since it is not using the familiar xml syntax.</p>
+<p>But also, it will result in a considerable effort for configuration and maintenance.
+For example, we will probably need to have the realm and clients configuration scripted and version controlled, so that we can apply them in any environment needed (local or not).</p>
 </div>
 </div>
 </div>
