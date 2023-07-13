@@ -1,4 +1,4 @@
-= A test diagram
+= A test diagram test
 
 [structurizr]
 ....
