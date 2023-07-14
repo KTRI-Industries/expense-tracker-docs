@@ -6,10 +6,6 @@
 ** xref:adrs/0002-database-and-libraries.adoc[]
 ** xref:adrs/0003-oauth.adoc[]
 * xref:diagram.adoc[]
-// * xref:special-characters.adoc[]
-// * xref:admonition.adoc[]
-// * xref:sidebar.adoc[]
-// * xref:ui-macros.adoc[]
-// * Lists
-// ** xref:lists/ordered-list.adoc[]
-// ** xref:lists/unordered-list.adoc[]
+* Stories
+** xref:stories/customer_registration.adoc[]
+** xref:stories/invite_customer.adoc[]

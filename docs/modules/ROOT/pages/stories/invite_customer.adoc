@@ -1,0 +1,22 @@
+= Invite new customer
+
+[plantuml]
+....
+@startuml
+!include https://raw.githubusercontent.com/johthor/DomainStory-PlantUML/main/domainStory.puml
+
+Person(customer)
+Person(customer_to_be)
+
+System(expenseTracker, expense tracking system)
+
+Document(addUserPage, add user page)
+Document(addUserForm, add user form)
+Document(email, email)
+
+activity(_, customer, opens, addUserPage, with, expenseTracker)
+activity(_, customer, enters email address of , customer_to_be, to, addUserForm)
+activity(_<, expenseTracker, sends, email, to, customer_to_be)
+
+@enduml
+....
