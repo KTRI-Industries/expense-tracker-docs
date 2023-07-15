@@ -1,0 +1,38 @@
+= Add recurrent income
+
+[plantuml]
+....
+@startuml
+!include https://raw.githubusercontent.com/johthor/DomainStory-PlantUML/main/domainStory.puml
+
+!include <material/currency_eur>
+!unquoted procedure Euro($name, $label = "", $color = "", $scale = "", $note = "")
+    Actor("Euro", "$ma_currency_eur", $name, $label, $color, $scale, $note)
+!endprocedure
+
+!include <material/calendar>
+!unquoted procedure Calendar($name, $label = "", $color = "", $scale = "", $note = "")
+    Actor("Calendar", "$ma_calendar", $name, $label, $color, $scale, $note)
+!endprocedure
+
+Person(customer)
+Euro(amount)
+Calendar(calendar)
+
+System(expenseTracker, expense tracking system)
+
+Document(addIncomePage, add recurring income page)
+Document(addIncomeForm, add recurring income form)
+Document(income, recurring income)
+Document(incomeEntry,incomeEntry)
+Document(category,category, $note=optional)
+Info(recurrence, recurrence)
+Euro(currentMonthTotal,current month total, $note=if applicable)
+
+activity(_, customer, opens, addIncomePage, with, expenseTracker)
+activity(_, customer, enters , amount, to, addIncomeForm)
+activity(_, customer, selects, recurrence, from, calendar)
+activity(_, customer, tags, incomeEntry, with, category)
+activity(_<, expenseTracker, adds, income, to, currentMonthTotal)
+@enduml
+....

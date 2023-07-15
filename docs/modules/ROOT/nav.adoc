@@ -9,3 +9,5 @@
 * Stories
 ** xref:stories/customer_registration.adoc[]
 ** xref:stories/invite_customer.adoc[]
+** xref:stories/add_income.adoc[]
+** xref:stories/add_recurrent_income.adoc[]
