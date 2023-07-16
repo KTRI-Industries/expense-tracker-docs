@@ -1,22 +1,48 @@
-= Invite new customer
+= Invite new customer to existing tenant
 
 [plantuml]
 ....
 @startuml
+
 !include https://raw.githubusercontent.com/johthor/DomainStory-PlantUML/main/domainStory.puml
+
+!include <material/email>
+!unquoted procedure Euro($name, $label = "", $color = "", $scale = "", $note = "")
+    Actor("Email", "$ma_email", $name, $label, $color, $scale, $note)
+!endprocedure
+
 
 Person(customer)
 Person(customer_to_be)
 
 System(expenseTracker, expense tracking system)
+Info(tenant, existing tenant)
 
-Document(addUserPage, add user page)
-Document(addUserForm, add user form)
-Document(email, email)
 
-activity(_, customer, opens, addUserPage, with, expenseTracker)
-activity(_, customer, enters email address of , customer_to_be, to, addUserForm)
-activity(_<, expenseTracker, sends, email, to, customer_to_be)
+Boundary(invitation) {
+
+    Document(addUserPage, add user page)
+    Document(addUserForm, add user form)
+    Email(email, email)
+
+
+    activity(_, customer, opens, addUserPage, with, expenseTracker)
+    activity(_, customer, enters email address of , customer_to_be, to, addUserForm)
+    activity(_<, expenseTracker, sends, email, to, customer_to_be)
+}
+
+Boundary(registration) {
+
+    Document(registrationPage, registration to existing tenant page)
+    Document(registrationForm, registration form)
+
+
+    Email(email2, email)
+
+    activity(_, customer_to_be, navigates to, registrationPage, from, email2)
+    activity(_, customer_to_be, fills info in, registrationForm)
+    activity(_<, expenseTracker, adds, customer_to_be, to, tenant)
+}
 
 @enduml
 ....
