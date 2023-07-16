@@ -1,0 +1,30 @@
+= Add once-off income
+
+[plantuml]
+....
+@startuml
+!include https://raw.githubusercontent.com/johthor/DomainStory-PlantUML/main/domainStory.puml
+
+!include <material/currency_eur>
+!unquoted procedure Euro($name, $label = "", $color = "", $scale = "", $note = "")
+    Actor("Euro", "$ma_currency_eur", $name, $label, $color, $scale, $note)
+!endprocedure
+
+Person(customer)
+Euro(amount)
+
+System(expenseTracker, expense tracking system)
+
+Document(addIncomePage, add income page)
+Document(addIncomeForm, add income form)
+Document(income,income)
+Document(incomeEntry,incomeEntry)
+Document(category,category, $note=optional)
+Euro(currentMonthTotal,current month total)
+
+activity(_, customer, opens, addIncomePage, with, expenseTracker)
+activity(_, customer, enters , amount, to, addIncomeForm)
+activity(_, customer, tags, incomeEntry, with, category)
+activity(_<, expenseTracker, adds, income, to, currentMonthTotal)
+@enduml
+....

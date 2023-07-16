@@ -1,0 +1,21 @@
+= Customer registration
+
+[plantuml]
+....
+@startuml
+!include https://raw.githubusercontent.com/johthor/DomainStory-PlantUML/main/domainStory.puml
+
+Person(customer)
+
+System(expenseTracker, expense tracking system)
+
+Document(registrationPage, registration page)
+Document(registrationForm, registration form)
+
+
+activity(_, customer, opens, registrationPage, with, expenseTracker)
+activity(_, customer, fills info in, registrationForm, with, expenseTracker)
+activity(_<, expenseTracker, creates, Info: Tenant, for, customer)
+
+@enduml
+....
