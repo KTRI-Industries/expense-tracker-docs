@@ -42,11 +42,30 @@
 
 === Backend
 
-* [ ] Kotlin / Spring Boot
+* [x] Kotlin / Spring Boot
+
+* [x] Gradle/ Kotlin DSL
+
+* [x] OpenAPI
+
+* [x] PostgreSQL
+
+* [x] Hibernate
+
+* [ ] jOOQ
+
+* [x] Keycloak
 
 === Frontend
 
-* [ ] Typescript / Angular
+* [x] Typescript / Angular
+
+* [x] Nx stand-alone project
+
+* [x] Ngrx state management
+
+* [x] OpenAPI client
+
 
 == Style guides
 
