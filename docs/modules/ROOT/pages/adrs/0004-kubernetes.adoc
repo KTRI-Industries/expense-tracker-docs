@@ -1,0 +1,43 @@
+= ADR 0004: Deployment Infrastructure as code (IaC)
+
+Date: 2023-07-21
+
+== Status
+
+Proposed
+
+== Context
+
+The decision has been already made to deploy the project in a Kubernetes environment.
+This provides the flexibility to not have to decide too soon on what cloud provider to deploy (or even if we should just deploy in a IaaS provider).
+
+Having decided that, there is a need for all infrastructure pieces being deployed from code/scripts.
+There are various solutions available.
+These solutions can be categorised in two categories:
+
+. Code based solutions
+. Yaml based solutions
+
+In the first category there are tools like Pulumi and cdk8s.
+
+These tools provide libraries in Java or Typescript so the configuration is written in code and Kubernetes yaml manifests are generated from it, with all the advantages that this provides (e.g. autocomplete, refactoring, testing etc).
+
+In the second category there are tools like Helm and Kustomize.
+
+These tools provide a way to dynamically create Kubernetes yaml manifest, each with their own mechanisms and syntax (templates or overlays).
+
+== Decision
+
+Helm will be used mainly because it is an established and popular tool.
+Helm will be used as a package manager too, so it makes sense to use it for configuring all the infrastructure components in a unified way.
+
+== Consequences
+
+Helm charts structure needs some getting used too, especially when dealing with indentations and white spaces.
+
+Using Helm provides a more unified lifecycle support (like versioning, rolling updates, rollback etc.).
+
+Furthermore, Helm provides specific way to deploy to multiple environments, which is a must-have for the project.
+
+Finally, not using a code based tool means that we will not have the flexibility that code provides.
+
