@@ -8,12 +8,11 @@ Proposed
 
 == Context
 
-The decision has been already made to deploy the project in a Kubernetes environment.
+The decision has already been made to deploy the project in a Kubernetes environment.
 This provides the flexibility to not have to decide too soon on what cloud provider to deploy (or even if we should just deploy in a IaaS provider).
 
-Having decided that, there is a need for all infrastructure pieces being deployed from code/scripts.
-There are various solutions available.
-These solutions can be categorised in two categories:
+Having decided that, there is a need for all infrastructure pieces to be deployed using code/scripts.
+There are various solutions available, which can be categorised as follows:
 
 . Code based solutions
 . Yaml based solutions
@@ -24,7 +23,7 @@ These tools provide libraries in Java or Typescript so the configuration is writ
 
 In the second category there are tools like Helm and Kustomize.
 
-These tools provide a way to dynamically create Kubernetes yaml manifest, each with their own mechanisms and syntax (templates or overlays).
+These tools provide a way to dynamically create Kubernetes yaml manifests, each with their own mechanisms and syntax (templates or overlays).
 
 == Decision
 
@@ -39,5 +38,5 @@ Using Helm provides a more unified lifecycle support (like versioning, rolling u
 
 Furthermore, Helm provides specific way to deploy to multiple environments, which is a must-have for the project.
 
-Finally, not using a code based tool means that we will not have the flexibility that code provides.
+Finally, not using a code based tool means that we will not have the flexibility that IaC provides.
 
