@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ADR 0002: Use Postgres and jOOQ :: Expense Tracker Docs</title>
+    <title>ADR 0004: Deployment Infrastructure as code (IaC) :: Expense Tracker Docs</title>
     <meta name="generator" content="Antora 3.1.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
   </head>
@@ -77,7 +77,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="0001-gradle-multi-project.html">ADR 0001: Create single multi-project Gradle build</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="0002-database-and-libraries.html">ADR 0002: Use Postgres and jOOQ</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -94,7 +94,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Unlisted Pages</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="0004-kubernetes.html">ADR 0004: Deployment Infrastructure as code (IaC)</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -130,22 +130,22 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Docs</a></li>
-    <li>Architecture Decision Records</li>
-    <li><a href="0002-database-and-libraries.html">ADR 0002: Use Postgres and jOOQ</a></li>
+    <li>Unlisted Pages</li>
+    <li><a href="0004-kubernetes.html">ADR 0004: Deployment Infrastructure as code (IaC)</a></li>
   </ul>
 </nav>
-<div class="edit-this-page"><a href="https://github.com/KTRI-Industries/expense-tracker-docs/edit/main/docs/modules/ROOT/pages/adrs/0002-database-and-libraries.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/KTRI-Industries/expense-tracker-docs/edit/main/docs/modules/ROOT/pages/adrs/0004-kubernetes.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">ADR 0002: Use Postgres and jOOQ</h1>
+<h1 class="page">ADR 0004: Deployment Infrastructure as code (IaC)</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Date: 2023-07-03</p>
+<p>Date: 2023-07-21</p>
 </div>
 </div>
 </div>
@@ -153,7 +153,7 @@
 <h2 id="_status"><a class="anchor" href="#_status"></a>Status</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Accepted</p>
+<p>Proposed</p>
 </div>
 </div>
 </div>
@@ -161,20 +161,34 @@
 <h2 id="_context"><a class="anchor" href="#_context"></a>Context</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When it comes to relational databases, the de facto choices are MySQL and PostgreSQL.</p>
+<p>The decision has already been made to deploy the project in a Kubernetes environment.
+This provides the flexibility to not have to decide too soon on what cloud provider to deploy (or even if we should just deploy in a IaaS provider).</p>
 </div>
 <div class="paragraph">
-<p>PostgreSQl is very similar to MySQL, but it is supposed to be a more advanced version, with more features.
-Also, because it uses Multi-version concurrency control (MVCC) it is supposed to outperform MySQL in write-intensive applications.</p>
+<p>Having decided that, there is a need for all infrastructure pieces to be deployed using code/scripts.
+There are various solutions available, which can be categorised as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Code based solutions</p>
+</li>
+<li>
+<p>Yaml based solutions</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>When accessing database from JVM applications, Hibernate is the ORM of choice.
-But it is not easy to create complex dynamic queries with Hibernate.
-Also, you need to be very careful when querying entities with nested relationships because the generated query is not always obvious.</p>
+<p>In the first category there are tools like Pulumi and cdk8s.</p>
 </div>
 <div class="paragraph">
-<p>jOOQ can be a replacement for Hibernate, but also it can be used together with Hibernate.
-In that case, all non-trivial queries can be written in jOOQ but still use Hibernate for entity lifecycle operations (e.g. retrieve an entity, update and store it).</p>
+<p>These tools provide libraries in Java or Typescript so the configuration is written in code and Kubernetes yaml manifests are generated from it, with all the advantages that this provides (e.g. autocomplete, refactoring, testing etc).</p>
+</div>
+<div class="paragraph">
+<p>In the second category there are tools like Helm and Kustomize.</p>
+</div>
+<div class="paragraph">
+<p>These tools provide a way to dynamically create Kubernetes yaml manifests, each with their own mechanisms and syntax (templates or overlays).</p>
 </div>
 </div>
 </div>
@@ -182,10 +196,8 @@ In that case, all non-trivial queries can be written in jOOQ but still use Hiber
 <h2 id="_decision"><a class="anchor" href="#_decision"></a>Decision</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We will use a dockerized PostgreSQL instance for local development.</p>
-</div>
-<div class="paragraph">
-<p>We will start with Hibernate and introduce jOOQ when initial database schema is created (jOOQ needs existing database for auto-generated classes).</p>
+<p>Helm will be used mainly because it is an established and popular tool.
+Helm will be used as a package manager too, so it makes sense to use it for configuring all the infrastructure components in a unified way.</p>
 </div>
 </div>
 </div>
@@ -193,15 +205,16 @@ In that case, all non-trivial queries can be written in jOOQ but still use Hiber
 <h2 id="_consequences"><a class="anchor" href="#_consequences"></a>Consequences</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Using PostgreSQL does not mean we need to use all the advanced features that are provided and that MySQL does not offer.
-It means that when we need such a feature it will be there for us to use it.
-One feature that we might end up using is row level security, to be used for multi-tenancy (see for example <a href="https://betterprogramming.pub/multi-tenancy-support-with-spring-boot-liquibase-and-postgresql-d41942dc0639">here</a>)</p>
+<p>Helm charts structure needs some getting used too, especially when dealing with indentations and white spaces.</p>
 </div>
 <div class="paragraph">
-<p>Using jOOQ will result in a slight learning curve, but we can use it only when complex queries are needed, or maybe when native PostgreSQL features can be used, or advanced SQL syntax which are things not available in Hibernate.</p>
+<p>Using Helm provides a more unified lifecycle support (like versioning, rolling updates, rollback etc.).</p>
 </div>
 <div class="paragraph">
-<p>Finally, there is a killer feature, in case of complex queries, which is the <a href="https://vladmihalcea.com/fetch-multiple-to-many-jooq-multiset/">multiset</a>.</p>
+<p>Furthermore, Helm provides specific way to deploy to multiple environments, which is a must-have for the project.</p>
+</div>
+<div class="paragraph">
+<p>Finally, not using a code based tool means that we will not have the flexibility that IaC provides.</p>
 </div>
 </div>
 </div>
