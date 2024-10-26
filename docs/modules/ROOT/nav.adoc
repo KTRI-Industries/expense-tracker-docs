@@ -7,4 +7,5 @@
 ** xref:adrs/0003-oauth.adoc[]
 ** xref:adrs/0004-kubernetes.adoc[]
 * xref:diagram.adoc[]
+* xref:deployment_diagram.adoc[]
 

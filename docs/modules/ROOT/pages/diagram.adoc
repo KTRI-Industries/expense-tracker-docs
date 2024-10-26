@@ -1,18 +1,30 @@
-= A test diagram
+= Component diagram
 
 [structurizr]
 ....
 workspace {
 
     model {
-        user = person "User" "A user of Expense Manager."
-        softwareSystem = softwareSystem "Software System" "Expense Manager."
+        user = person "User" "A user of Expense Tracker."
+        softwareSystem = softwareSystem "Expense Tracker" "Allows user to track expenses together with income." {
+            backendApp = container "expense-tracker-core" "Handles business logic" "Kotlin and Spring Boot"
+            frontendApp = container "expense-tracker-ui" "Handles user interface" "Angular"
+            database = container "Postgres Database" "Stores user data" "PostgreSQL" "database"
+            keycloak = container "Keycloak IAM" "Handles authentication and authorization" "Keycloak"
+        }
 
         user -> softwareSystem "Uses"
+
+        user -> frontendApp "Uses"
+        frontendApp -> backendApp "Sends requests"
+        backendApp -> database "Reads from and writes to"
+        backendApp -> keycloak "Uses for authentication and authorization"
     }
 
     views {
-        systemContext softwareSystem "SystemContext" {
+
+
+        container softwareSystem "ContainerDiagram" {
             include *
             autoLayout
         }
@@ -26,6 +38,13 @@ workspace {
                 shape person
                 background #08427b
                 color #ffffff
+            }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "database" {
+                shape Cylinder
             }
         }
     }

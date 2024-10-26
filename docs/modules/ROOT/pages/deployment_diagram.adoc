@@ -1,0 +1,96 @@
+= Deployment diagram (DEV)
+
+[structurizr]
+....
+workspace {
+
+    model {
+
+        user = person "User" "A user of Expense Tracker."
+
+        softwareSystem = softwareSystem "Expense Tracker" "Allows user to track expenses together with income." {
+
+            backendApp = container "expense-tracker-core" "Handles business logic" "Kotlin and Spring Boot" "backend"
+            frontendApp = container "expense-tracker-ui" "Handles user interface" "Angular"
+            database = container "Postgres Database" "Stores user data" "PostgreSQL" "database"
+            keycloak = container "Keycloak IAM" "Handles authentication and authorization" "Keycloak"
+            keycloakDb = container "Keycloak Database" "Stores Keycloak Data" "PostgreSQL" "KeycloakDB"
+            mailhog = container "Mailhog Service" "Email Server for testing"
+
+        }
+
+        user -> softwareSystem "Uses"
+
+        user -> frontendApp "Uses"
+        frontendApp -> backendApp "Sends requests"
+        backendApp -> database "Reads from and writes to"
+        backendApp -> keycloak "Uses for authentication and authorization"
+        keycloak -> keycloakDb "Stores keycloak data"
+        keycloak -> mailhog "Sends emails"
+
+        development = deploymentEnvironment "Dev" {
+            deploymentNode "Developer Laptop" {
+                deploymentNode "Kubernetes cluster" "" "k3d" {
+                    deploymentNode "Kubernetes node" "" "k3s node" {
+
+                        deploymentNode "Expense Tacker Core Deployment" {
+                            containerInstance backendApp
+                        }
+
+                        deploymentNode "Expense Tracker Keycloak Deployment" {
+                            instances 2
+                            containerInstance keycloak
+                        }
+
+                        deploymentNode "Expense Tracker Keycloak Db Cluster" {
+                            instances 3
+                            containerInstance keycloakDb
+                        }
+
+                        deploymentNode "Expense Tracker Core Db Cluster" {
+                            instances 3
+                            containerInstance database
+                        }
+
+                          deploymentNode "Mailhog Replica Set" {
+                            containerInstance mailhog
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    views {
+
+
+        deployment * development {
+                    include *
+        }
+
+        styles {
+            element "Software System" {
+                background #1168bd
+                color #ffffff
+            }
+            element "Person" {
+                shape person
+                background #08427b
+                color #ffffff
+            }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "database" {
+                shape Cylinder
+            }
+            element "KeycloakDB" {
+                shape Cylinder
+            }
+        }
+    }
+
+}
+....
